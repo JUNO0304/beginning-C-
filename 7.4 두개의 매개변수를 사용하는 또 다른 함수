@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+long double probability(unsigned numbers, unsigned picks);
+int main()
+{
+    double total, choices; 
+    cout << "전체 수의 개수와 뽑을 수의 개수를 입력하십시오: \n";
+    while((cin >> total >> choices) && choices <= total)
+    {
+        cout << "당신이 이길 확률은 ";
+        cout << probability (total, choices);  
+        cout << "번 중에서 한 번입니다. \n";
+        cout << "다시 두 수를 입력하십시오. (끝내려면 q를 입력): ";
+    }
+    cout << "프로그램을 종료합니다. \n";
+    return 0; 
+}
+
+long double probability (unsigned numbers, unsigned picks)
+{
+    long double result = 1.0;
+    long double n;
+    unsigned p;
+
+    for(n = numbers, p = picks; p > 0; n--, p--)
+    {
+        result = result * n/ p; 
+    }
+    return result;
+}
+
+/*
+두개의 매개변수를 사용하는 또 다른 함수
+로토게임 - 51개의 수가 들어있는 카드중에서 내가 뽑은 6장의 카드와 로토 관리자가 뽑은 6장의 카드가 정확히 일치할시 상금을 얻는게임
+
+승률을 구하는 공식 R = 51 * 50 * 49 * 48 * 47 * 46/ 6 * 5 * 4 * 3 * 2 * 1
+이 계산을 위해 우리는 for 구문을 사용할수 있다.
+long double result = 1.0;
+for(n = numbers, p = picks; p > 0; n--, p--)
+    result = result *n / p; 
+*/
+
+/*
+전체 수의 개수와 뽑을 수의 개수를 입력하십시오: 
+49 6 
+당신이 이길 확률은 1.39838e+07번 중에서 한 번입니다. 
+다시 두 수를 입력하십시오. (끝내려면 q를 입력): 51 6 
+당신이 이길 확률은 1.80095e+07번 중에서 한 번입니다. 
+다시 두 수를 입력하십시오. (끝내려면 q를 입력): 38 6 
+당신이 이길 확률은 2.76068e+06번 중에서 한 번입니다. 
+다시 두 수를 입력하십시오. (끝내려면 q를 입력): q
+프로그램을 종료합니다. 
+*/
