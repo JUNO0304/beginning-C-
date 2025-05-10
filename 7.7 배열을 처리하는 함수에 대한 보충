@@ -1,0 +1,165 @@
+#include <iostream>
+using namespace std;
+const int Max = 5; 
+int fill_array(double ar[], int limit);
+void show_array(const double ar[], int n);
+void revalue(double r, double ar[], int n);
+
+int main()
+{
+    double properties[Max];
+    int size = fill_array(properties, Max);
+    show_array(properties, size);
+    if(size > 0)
+    {
+        cout << "재평가율을 입력하십시오: ";
+        double factor;
+        while(!(cin >> factor))
+        {
+            cin.clear();
+            while(cin.get() != '\n')
+                continue;
+            cout << "잘못 입력했습니다, 수치를 입력하세요: ";
+        }
+        revalue(factor, properties, size);
+        show_array(properties, size);
+    }
+    cout << "프로그램을 종료합니다. \n";
+    cin.get();
+    cin.get();
+    return 0; 
+}
+
+int fill_array(double ar[], int limit)
+{
+    double  temp;
+    int i;
+    for(i = 0; i < limit; i++)
+    {
+        cout << (i + 1) << "번 부동산의 가격: ";
+        cin >> temp;
+        if(!cin)
+        {
+            cin.clear();
+            while(cin.get() != '\n')
+                continue;
+            cout << "입력 불량; 입력 과정을 끝내겠습니다. \n";
+            break;
+        }
+        else if(temp < 0)
+            break;
+        ar[i] = temp; 
+    }
+    return i; 
+}
+
+void show_array(const double ar[], int n)
+{
+    for(int i = 0; i < n; i++)
+    {
+        cout << (i + 1) << "번 부동산: $";
+        cout << ar[i] << endl; 
+    }
+}
+
+void revalue (double r, double ar[], int n)
+{
+    for(int i = 0; i < n; i++)
+        ar[i] *= r; 
+}    
+/*
+배열을 처리하는 함수에 대한 보충
+*부동산 가격을 다루는 배열을 사용하고 싶다고 가정 해 보자.
+(필요하면 자신이 실제로 보유하고 있는 부동산에 이것을 적용해 볼 수 있다.)
+먼저, 사용할 데이터형을 결정해야한다. double형이 범위에 대한 제약이 적다. 배열 원소의 개수도 결정해야 한다. 
+
+*우리가 함수를 만들때 고려해야하는 요소들은 다음과 같다.
+    -배열의 크기를 함수안에 확정하지 않고, 두번째 매개변수로 배열의 크기를 전달한다.
+    -배열을 완전히 채우기 전에 데이터 읽기를 그만둘 수도 있어야 한다.
+    -최대 허용 개수보다 값을 적게 입력할 수도 있으며 이것도 함수 안에 구현해야한다.
+    그렇게 해서 탄생한 함수 원형은:    int fill_array(double ar[], int limit);
+    - 여기서 우리는 배열을 채우기 위해서 루프를 사용할 것이다. 근데 원래 채워야 하는 양보다 적게 채우려면 루프를 어떤 방식으로 탈출할것인가?
+        우리는 특수한 방법을 사용하여 루프를 탈출할수있다
+        부동산 가격은 음수를 값으로 가질수 없기에 입력의 끝을 나타내기 위해 음수를 사용할수있다.
+        그러면 다음과 같은 함수가 탄생한다.
+    int fill_array(double ar[], int limit)
+    {
+        double  temp;
+        int i;
+        for(i = 0; i < limit; i++)
+        {
+            cout << (i + 1) << "번 부동산의 가격: ";
+            cin >> temp;
+            if(!cin)
+            {
+                cin.clear();
+                while(cin.get() != '\n')
+                    continue;
+                cout << "입력 불량; 입력 과정을 끝내겠습니다. \n";
+                break;
+            }
+            else if(temp < 0)
+                break;
+            ar[i] = temp; 
+        }
+        return i; 
+    }
+    루프가 마지막으로 하는 행동은 i를 증가시키는것이다. 그리고 i의 값은 원소를 지시하는 인덱스보다 1크다 이것은 값이 채워진 원소의 개수와 같다. 함수는 이 값을 리턴한다. 
+
+    배열의 내용 출력과 const로 보호하기
+    우리는 함수에서 배열의 원본을 가지고 작업하기 때문에 실수로 데이터를 건드릴 수도 있다. 이를 해결하는데 있어 좋은 방법은 const 의 활용이다.
+    void show_array(const double ar[], int n);
+    이 선언은 포인터 ar가 상수 데이터를 지시하고 있다는 것을 의미하며, ar를 사용해서는 그 데이터를 변경할 수 없다는 것을 뜻한다. 
+    show_array()함수에 대한 코드
+    void show_array(const double ar[], int n)
+    {
+        for(int i = 0; i < n; i++)
+        {
+            cout << (i + 1) << "번 부동산: $";
+            cout << ar[i] << endl; 
+        }
+    }
+    
+    배열의 수정
+    재평가율을 각각의 원소에 곱하는것. 재평가율, 배열 이름, 원소의 개수를 함숭 매개변수로 전달해야한다.
+    void revalue (double r, double ar[], int n)
+    {
+        for(int i = 0; i < n; i++)
+            ar[i] *= r; 
+    }
+    이 함수는 원본 배열의 값을 변경할 목적을 가지고 있기 때문에 ar를 선언할때 const를 사용하면 안된다. 
+*/
+
+/*
+1번 부동산의 가격: 100000
+2번 부동산의 가격: 80000
+3번 부동산의 가격: 222000
+4번 부동산의 가격: 240000
+5번 부동산의 가격: 118000
+1번 부동산: $100000
+2번 부동산: $80000
+3번 부동산: $222000
+4번 부동산: $240000
+5번 부동산: $118000
+재평가율을 입력하십시오: 0.8
+1번 부동산: $80000
+2번 부동산: $64000
+3번 부동산: $177600
+4번 부동산: $192000
+5번 부동산: $94400
+프로그램을 종료합니다.
+
+
+1번 부동산의 가격: 200000
+2번 부동산의 가격: 84000
+3번 부동산의 가격: 160000
+4번 부동산의 가격: -2
+1번 부동산: $200000
+2번 부동산: $84000
+3번 부동산: $160000
+재평가율을 입력하십시오: 1.20 
+1번 부동산: $240000
+2번 부동산: $100800
+3번 부동산: $192000
+프로그램을 종료합니다.
+*/
