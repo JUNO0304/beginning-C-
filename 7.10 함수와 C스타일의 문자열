@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+unsigned int c_in_str(const char* str, char ch);
+
+int main()
+{
+    char mmm[15] = "minimum";
+
+    char * wail = "ululate";
+
+    unsigned int ms = c_in_str(mmm, 'm');
+    unsigned int us = c_in_str(wail, 'u');
+    cout << mmm << "에는 m이 " << ms << "개 들어있습니다.\n";
+    cout << wail << "에는 u가 " << us << "개 들어 있습니다\n";
+    return 0; 
+} 
+
+unsigned int c_in_str(const char * str, char ch)
+{
+    int count = 0; 
+    while(*str)
+    {
+        if(*str == ch)
+            count++;
+        str++;
+    }
+    return count; 
+}
+
+/*
+함수와 C 스타일의 문자열
+- C스타일의 문자열은 널 문자로 끝나는 연속된 문자들이다. 배열 처리 함수를 설계 하면서 배운 많은 내용을 문자열 처리 함수에 적용할수 있다. 
+
+- C스타일 문자열을 매개변수로 사용하는 함수
+함수의 매개변수로 문자열을 전달해야 한다고 가정해 보자. 문자열을 나타내는 방식은 3가지가 있다
+*char 형의 배열
+* 큰따옴표로 묶은 문자열 상수 (문자열 리터럴)
+* 문자열의 주소로 설정된 char형을 지시하는 포인터
+
+char ghost[15] = "galloping";
+char * s tr = "galumphing";
+int n1 = strlen(ghost);     ghost 는 &ghost[0]이다
+int n2 = strlen(str);       char형을 지시하는 포인터
+int n3 = strlen("gamboling");       문자열의 주소
+
+어떤 문자열에서 특정 문자가 몇번 나오는지 카운트하는 함수
+*음수값을 다룰 필요가 없으므로 unsigned int를 카운트를 위한 타입으로 사용한다
+*/
+
+/*
+minimum에는 m이 3개 들어있습니다.
+ululate에는 u가 2개 들어 있습니다
+*/
