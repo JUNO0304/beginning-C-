@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+struct travel_time
+{
+    int hours;
+    int mins;
+};
+const int Mins_per_hr = 60;
+travel_time sum(travel_time t1, travel_time t2);
+void show_time(travel_time t);
+
+int main()
+{
+    travel_time day1 = {5, 45};
+    travel_time day2 = {4, 55};
+
+    travel_time trip = sum(day1, day2);
+    cout << "이틀간 소요시간: ";
+    show_time(trip);
+
+    travel_time day3 = {4, 32};
+    cout << "사흘간 소요시간: ";
+    show_time(sum(trip, day3));
+
+    return 0;
+}
+
+travel_time sum(travel_time t1, travel_time t2)
+{
+    travel_time total;
+
+    total.mins = (t1.mins + t2.mins) % Mins_per_hr;
+    total.hours = t1.hours + t2.hours + (t1.mins + t2.mins) / Mins_per_hr; 
+    return total; 
+}
+
+void show_time(travel_time t)
+{
+    cout << t.hours << "시간 " << t.mins << "분\n";
+}
+
+/*
+함수와 구조체
+*함수는 구조체의 원본이 아니라 복사본을 가지고 작업한다. 
+*함수는 구조체를 리턴할수있다.
+구조체는 구조체 자체의 데이터형으로 매개변수 활용이 가능하지만, 단점이라면 크기가 너무 클시, 복사하는데 시간이 걸린다는것이다. 
+-> 이러한 이유 때문에 많은 프로그래머들이 구조체의 주소를 전달한다. 
+
+구조체의 전달과 리턴
+첫번째 예시: 여행 소요시간
+서울에서 대구까지 3시간 50분이 걸리고, 대구에서 경주까지 1시간 25분이 걸린다.
+시간 값을 첫째 멤버로, 분값을 둘째 멤버로 가지는 구조체를 만들면 이러한 소요시간을 나타낼수 있다.
+구조체는 다음과 같이 정의 할수 있다.
+structure travel_time
+{
+    int hours;
+    int mins;
+};
+
+두 구조체의 합을 구하여 리턴하는 함수의 데이터형은 travel_time 이어야 한다.
+sum() 함수에 전달되는 두 매개변수도 travel_time 형이어야 한다.
+함수의 원형은 다음과 같다.
+travel_time sum(travel_time t1, travel_time t2);
+두 소
+
+/*
+이틀간 소요시간: 10시간 40분
+사흘간 소요시간: 15시간 12분
+*/
