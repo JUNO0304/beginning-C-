@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+char * buildstr(char c, int n);
+int main()
+{
+    int times;
+    char ch; 
+
+    cout << "문자 하나를 입력하십시오: ";
+    cin >> ch;
+    cout << "정수 하나를 입력하십시오: ";
+    cin >> times;
+    char *ps = buildstr(ch, times);
+    cout << ps << endl;
+    delete [] ps;
+    ps = buildstr('+', 20);
+    cout << ps << "-DONE-" << ps << endl; 
+    delete [] ps;
+
+    return 0;
+}
+
+char * buildstr(char c, int n)
+{
+    char * pstr = new char[n + 1];
+    pstr[n] = '\0';
+    while(n-- > 0)
+        pstr[n] = c; 
+    return pstr; 
+}
+
+/*
+C스타일 문장녈을 리턴하는 함수
+문자열을 리턴하는 함수를 작성하고 싶다고 가정하자.
+함수로는 문자열 자체를 리턴하룻 없다. 그 대신에 문자열의 주소를 리턴할 수 있다.
+
+/*
+문자 하나를 입력하십시오: V
+정수 하나를 입력하십시오: 46 
+VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+++++++++++++++++++++-DONE-++++++++++++++++++++
+*/
