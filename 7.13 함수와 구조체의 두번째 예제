@@ -1,0 +1,88 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+struct rect     // 직각 좌표계
+{
+    double x;
+    double y; 
+};
+
+struct polar    // 극 좌표계
+{
+    double distance;
+    double angle;
+};
+polar rect_to_polar(rect xypos);
+void show_polar(polar dapos);
+
+int main()
+{
+    rect rplace;
+    polar pplace;
+
+    cout << "x 값과 y 값을 입력하십시오: ";
+    while(cin >> rplace.x >> rplace.y)
+    {
+        pplace = rect_to_polar(rplace);
+        show_polar(pplace);
+        cout << "x값과 y값을 입력하십시오 (끝내려면 q를 입력): ";
+    }
+    cout << "프로그램을 종료합니다. \n";
+    return 0; 
+}
+
+polar rect_to_polar(rect xypos)
+{
+    polar answer; 
+
+    answer.distance = sqrt(xypos.x * xypos.x + xypos.y * xypos.y);
+    answer.angle = atan2(xypos.y, xypos.x);
+    return answer;
+}
+
+void show_polar(polar dapos)
+{
+    const double Rad_to_deg = 57.29577951;
+
+    cout << "거리 = " << dapos.distance;
+    cout << ", 각도 = " << dapos.angle *Rad_to_deg;
+    cout << "도\n";
+}
+
+/*
+함수와 구조체 두번째 예시
+서로 다른 방법으로 위치를 낱나내는 두 개의 구조체를 정의한 다음, 한 형태를 다른 형태로 변환하여 보여주는 함수를 만들것이다.
+struct rect     // 직각 좌표계
+{
+    double x;
+    double y; 
+};
+
+struct polar    // 극 좌표계
+{
+    double distance;
+    double angle;
+};
+
+C++ 라이브러리에 들어있는 수학 함수들은 각도가 라디안 단위라고 가정한다.
+그러므로 여기서도 라디안 단위의 각도를 사용할 필요가 있다. 출력을 위해 라디안 단위를 도 단위로 변환할수 있다. 
+이것은 라디안 값에 180/n 인 약 57.29577951 을 곱하는 것을 의마한다. 
+
+void show_polar (polar dapos)
+{
+    const double Rad_to_deg = 57.29577951;
+
+    cout << "거리 = " << dapo.distance;
+    cout << ", 각도 = " << dapos.angle *Rad_to_deg;
+    cout << "도\n";
+}
+
+*atan2() 함수는 x,y 값으로부터 각도를 구한다. 
+
+
+*/
+
+/*
+이틀간 소요시간: 10시간 40분
+사흘간 소요시간: 15시간 12분
+*/
