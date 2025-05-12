@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+double gildong(int);
+double moonsoo(int);
+void estimate(int lines, double (*pf)(int));
+
+int main()
+{
+    int code;
+
+    cout << "필요한 코드의 행 수를 입력하십시오: ";
+    cin >> code; 
+    cout << "홍길동의 시간 예상: \n";
+    estimate(code, gildong);
+    cout << "박문수의 시간 예상: \n";
+    estimate(code, moonsoo);
+    return 0; 
+}
+
+double gildong(int lns)
+{
+    return 0.05 *lns;
+}
+
+double moonsoo (int lns)
+{
+    return 0.03 * lns + 0.0004 * lns * lns; 
+}
+
+void estimate(int lines, double (*pf)(int))
+{
+    cout << lines << "행을 작성하는 데 ";
+    cout << (*pf)(lines) << "시간이 걸립니다. \n"; 
+}
+
+/*
+함수를 지시하는 포인터  
+함수도 주소를 가지고 있다
+다른 함수의 주소를 매개변수로 취하는 함수를 작성할 수 있다.
+
+*함수 포인터의 기초.
+주어진 행 수만큼 프로그램 코드를 작성하는 데 걸리는 시간을 평가하는 estimate() 라는 함수를 설계해야 한다고 가정하자. 
+-함수의 주소를 얻는다
+-함수를 지시하는 포인터를 선언한다.
+-함수를 지시하는 포인터를 사용하여 그 함수를 호출한다.
+
+함수 주소얻기
+뒤에 붙는 괄호를 빼고 함수 이름만 사용하면 된다.
+think() 가 함수라면, think는 그 함수의 주소이다. 
+
+함수를 지시하는 포인터의 선언.
+함수 원형 --> double pam(int);
+함수 지시하는 포인터 선언 --> double (*pf)(int);
+
+
+
+
+*/
+
+/*
+필요한 코드의 행 수를 입력하십시오: 30
+홍길동의 시간 예상: 
+30행을 작성하는 데 1.5시간이 걸립니다.
+박문수의 시간 예상:
+30행을 작성하는 데 1.26시간이 걸립니다.
+*/
