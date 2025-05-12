@@ -1,0 +1,106 @@
+1.함수를 사용하는 세 가지 단계는 무엇인가?
+    함수 원형
+    함수 호출
+    함수 정의
+
+2.다음 설명에 알맞은 함수 원형을 구성하라
+    a.igor()는 매개변수가 없고 리턴값도 없다.
+        void igor();
+    b.tofu() 는 int형 매개변수를 취하며 float 형을 리턴한다
+        float tofu(int n);
+    c.mpg()는 두개의 double 형 매개변수를 취하며 double형을 리턴한다
+        double mpg(double x, double y);
+    d.summnation() 은 long 형의 배열 이름과 그 배열의 크기를 매개변수로 취하며 long 형을 리턴한다.
+        long summation(long ar[], int size);
+    e.doctor() 는 문자열 매개변수를 취하며(그 문자열은 변경하면 안된다) double 형을 리턴한다
+        double doctor(const char * str)
+    f.ofcourse()는 boss 구조체를 매개변수로 취하며 리턴값이 없다.
+        void ofcourse(boss x)
+    g.plot() 은 map 구조체를 지시하는 포인터를 매개변수로 취하며 문자열을 리턴한다.
+        string plot(map (*ps) maps))
+    
+3. int 형 배열의 이름, 배열의 크기, 하나의 int형 값을 세 매개변수로 취하여, 그 배열의 모든 원소를 세 번째 매개변수인 int 형 값으로 설정하는 함수를 작성하라.
+    void fill(int ar[], int size, int n)
+    {
+        for(int i = 0; i < size; i++)
+            ar[i] = n; 
+    }
+
+4. int형 배열에서 어떤 범위의 첫 번째 원소를 지시하는 포인터, 그 배열에서 어떤 범위의 끝 바로 다음 원소를 지시하는 포인터, 하나의 int형 값을 세 매개변수로 취하여,
+    그 배열의 모든 원소를 세 번째 매개변수인 int형 값으로 설정하는 함수를 작성하라. 
+        void fill(int * begin, int * end, int n)
+        {
+            for(int * pt = begin, pt  != end; pt++)
+                *pt = value; 
+        }
+
+5. double 형의 배열 이름과 배열의 크기를 매개변수로 취하고, 그 배열에서 가장 큰 값을 리턴하는 함수를 작성하라. 다만, 이 함수는 그 배열의 내용을 변경하면 안된다.
+    double biggest(const double ar[], int size)
+    {
+        double biggest = 0;
+        for(int i = 0; i < size; i++)
+        {
+            if(biggest <= ar[i])
+                biggest = ar[i]
+        }
+        return biggest;
+    }
+
+6. 함수의 매개변수가 기본 데이터형일 때 const 제한자를 사용하지 않는 이유는 무엇인가?
+
+7. C++ 프로그램에서 문자열이 취할 수 있는 세 가지 형태는 무엇인가?
+    char[]
+    string
+
+8. 원형이 다음과 같은 함수를 작성하라.
+    int replace(char * str, char c1, char c2);
+    이 함수는 문자열 str에 들어있는 모든 c1을 c2로 대체하고, 대체한 개수를 리턴해야한다.
+        
+        int count;
+        for(int i = 0; str[i] != '\0'; i++)
+        {
+            if(str[i] == c1)
+            {
+                str[i] = c2;
+                count++;
+            }
+        }
+        return count;
+
+9. *"pizza" 는 무엇을 의미하는가? 또 "taco"[2] 는 무엇을 의미하는가?
+        첫번째는 pizza라는 문자열을 지시하는 포인터
+        두번째는 taco라는 문자열의 두번째 원소 즉 c
+
+10. C++에서는 구조체를 값으로 전달하거나 구조체의 주소를 전달할수 있다. glitz가 구조체 변수일 때, 그것을 값으로 전달하려면 어떻게 해야 하는가?
+    또 구조체의 주소는 어떻게 전달하는가? 이 두 가지 방법의 장단점은 무엇인가?
+        값으로 전달하는법 glitz.(변수)
+        주소로 전달하는법 &glitz;
+
+        장단점: 값으로 전달하면 함수는 glitz라는 구조체의 복사본을 가지고 작업하는 셈이다. 만약 구조체의 크기가 클시, 복사하는데 시간과 메모리가 더 많이 소요된다.
+        주소로 전달하면 함수가 구조체의 원본을 가지고 작업하는 셈이다. 이는 메모리와 시간은 적게 소요되지만, 수정하려고 의도하지 않은 요소들을 수정해버릴수도 있다.
+
+11. judge() 함수는 int형을 리턴하고 어떤 함수의 주소를 매개변수로 취한다. judge() 함수에 주소가 전달되는 함수는 const char 를 지시하는 포인터를 매개변수로 취하고 int 형을 리턴한다.
+    judge()함수의 원형을 작성하라.
+        int judge(const char (*pf)(int));
+
+12. 다음의 구조체 선언을 했다고 가정해 보자.
+        struct applicant {
+            char name [30];
+            int credit_ratings[3];
+        };
+    a. applicant 구조체를 argument로 사용하는 함수를 작성해서 구조체에 저장된 내용을 표시하라.
+        void show_applicant (applicant x)
+        {
+            cout << x.name << "\n";
+            for(int i = 0; i < 3; i++)
+                cout << x.credit_ratings[i] << "\n";
+        }
+    b. applicant 구조체의 주소를 사용하는 함수를 작성해서 그 구조에 지정된 내용을 표시하라.
+        void show_applicant(applicant *x)
+        {
+            cout << x->name << "\n";
+            for(int i = 0; i < 3; i++)
+                cout << x -> credit_ratings[i] << "\n";
+        }
+
+13.
