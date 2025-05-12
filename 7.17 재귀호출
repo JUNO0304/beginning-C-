@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+void countdown(int n);
+
+int main()
+{
+    countdown(4);
+    return 0; 
+}
+
+void countdown(int n)
+{
+    cout << "카운트 다운 ..." << n << endl;
+    if(n>0)
+        countdown(n-1);
+    cout << n << " : Kaboom!\n";
+}
+
+/*
+재귀 호출
+함수가 자기 자신을 호출할수 있는 능력을 재귀호출이라고 부른다. 
+
+*단일 재귀 호출
+만약 함수가 자기 자신을 호출할수 있게 프로그래밍된다면, 끝없는 굴레에 빠지게 될것이다. 이러한 사태를 방지하기 위해서 우리는 if 구문을 사용하여 재귀함수를 끝낼 방법을 마련한다
+void recurs(argumentlist)
+{
+    statements1
+    if (test)
+        recurs(argument)
+    statements2
+}
+
+
+
+
+*/
+
+/*
+카운트 다운 ...4
+카운트 다운 ...3
+카운트 다운 ...2
+카운트 다운 ...1
+카운트 다운 ...0
+0 : Kaboom!
+1 : Kaboom!
+2 : Kaboom!
+3 : Kaboom!
+4 : Kaboom!
+
+*/
