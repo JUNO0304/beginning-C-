@@ -87,6 +87,21 @@ void display(const free_throws & ft);   //구조체에 대하여 변경을 허�
 */
 
 /*
-27 = 3의 세제곱
-27 = 27의 세제곱
+Name: Ifelsa Branch
+Made: 13        Attempts: 14    Percent: 92.8571
+Name: Throwgoods
+Made: 13        Attempts: 14    Percent: 92.8571
+Name: Throwgoods
+Made: 23        Attempts: 30    Percent: 76.6667
+Name: Throwgoods
+Made: 35        Attempts: 48    Percent: 72.9167
+team 출력:
+Name: Throwgoods
+Made: 41        Attempts: 62    Percent: 66.129
+대입 이후 dup 출력:
+Name: Throwgoods
+Made: 41        Attempts: 62    Percent: 66.129
+문제 소지가 있는 대입 이후 dup 출력:
+Name: Whily Looper
+Made: 5 Attempts: 9     Percent: 55.5556
 */
