@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+
+int main()
+{
+    int rats = 101;
+    int & rodents = rats;
+
+    cout << "rats = " << rats;
+    cout << ", rodents = " << rodents << endl; 
+    rodents++;
+    cout << "rats = " << rats;
+    cout << ", rodents = " << rodents << endl;
+
+    cout << "rats의 주소 = " << &rats;
+    cout << ", rodents의 주소 = " << &rodents << endl;
+    return 0; 
+}
+
+/*
+참조 변수
+참조(reference) 는 미리 정의된 어떤 변수의 실제 이름 대신 쓸 수 있는 대용 이름이다. 
+EX) twain 을 celmens 변수의 참조로 만들면, twain 과 clemens는 같은 변수를 나타내는 것으로 사용할 수 있다. 
+참조의 주된 용도는 함수의 매개변수로 사용하는것이다.
+참조를 매개변수로 사용하면, 그 함수는 복사본 대신 원본 데이터를 가지고 작업한다.
+덩치 큰 구조체를 처리해야 하는 함수에서 포인터 대신에 참조를 사용할 수 있다. 
+
+-참조 변수의 생성
+int rats;
+int & rodents = rats;   //rodents 를 rats 의 대용이름으로 만든다
+&가 주소 연산자가 아니라, 데이터형 식별자의 일부로 사용된것이다.
+변수 선언에서 char * 가 문자를 지시하는 포인터를 의미하는 것처럼, int & 는 int에 대한 참조를 의미한다. 
+*/
+
+/*
+rats = 101, rodents = 101
+rats = 102, rodents = 102
+rats의 주소 = 0x5ffe54, rodents의 주소 = 0x5ffe54
+*/
