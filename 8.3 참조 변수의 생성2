@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+
+int main()
+{
+    int rats = 101;
+    int & rodents = rats;
+
+    cout << "rats = " << rats;
+    cout << ", rodents = " << rodents << endl; 
+
+    cout << "rats의 주소 = " << &rats;
+    cout << ", rodents의 주소 = " << &rodents << endl;
+
+    int bunnies = 50;
+    rodents = bunnies;
+    cout << "bunnies = " << bunnies;
+    cout << ", rats = " << rats;
+    cout << ", rodents = " << rodents << endl;
+    cout << ", rodents의 주소 = " << &rodents << endl;
+    return 0; 
+}
+
+/*
+참조 변수
+많은 이들이 그러면 참조 변수와 포인터의 차이점을 궁금해 한다.
+포인터와 참조변수는 실제로 다른점이 크게 많아 보이지 않는다.
+그러나 큰 차이점이 있다면, 참조변수는 초기화로 만들어 져야한다는 것이다.
+int rat;
+int & rodents;
+rodent = rat; 
+과 같은 코드는 실행 되지 않는다. rodents가 처음 만들어졌을때 초기화 되지 않았기 때문이다. 
+
+무엇보다 rodents 는 const 같은 느낌을 가진다. 한번 초기화된 변수의 주소값은 변하지 않는다.
+만약 rodents에 새로운 값을 대입한다면 그것은 rodents가 바뀌는것이 아니라 rat이 바뀌는것이다. 
+*/
+
+/*
+rats = 101, rodents = 101
+rats = 102, rodents = 102
+rats의 주소 = 0x5ffe54, rodents의 주소 = 0x5ffe54
+*/
