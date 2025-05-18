@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+void swapr(int & a, int & b);
+void swapp(int * p, int * q);
+void swapv(int a, int b);
+
+int main()
+{
+    int wallet1 = 3000;
+    int wallet2 = 3500;
+
+    cout << "지갑 1 = " << wallet1 << "원";
+    cout << ", 지갑 2 = " << wallet2 << "원\n";
+
+    cout << "참조를 이용하여 내용들을 교환:\n";
+    swapr(wallet1, wallet2);
+    cout << "지갑 1 = " << wallet1 << "원";
+    cout << ", 지갑 2 = " << wallet2 << "원\n";
+
+    cout << "포인터를 이용하여 내용들을 다시 교환:\n";
+    swapp(&wallet1, &wallet2);
+    cout << "지갑 1 = " << wallet1 << "원";
+    cout << ", 지갑 2 = " << wallet2 << "원\n";
+
+    cout << "값으로 전달하여 내용 교환 시도:\n";
+    swapv(wallet1, wallet2);
+    cout << "지갑 1 = " << wallet1 << "원";
+    cout << ", 지갑 2 = " << wallet2 << "원\n";
+
+    return 0; 
+}
+
+void swapr(int & a, int & b)
+{
+    int temp;
+
+    temp = a;
+    a = b;
+    b = temp;
+}
+
+void swapp(int * p, int * q)
+{
+    int temp;
+    temp = *p;
+    *p = *q;
+    *q = temp; 
+}
+
+void swapv (int a, int b)
+{
+    int temp;
+    temp = a; 
+    a =  b;
+    b = temp; 
+}
+
+/*
+함수 매개변수로서의 참조
+
+함수로 넘겨주는 참조 변수는 넘겨줄때 초기화 된다고 생각하면 된다.
+즉 swapr(wallet1, wallet2);
+는 형식 매개변수 a를 wallet1로 초기화하고 형식 매개변수 b를 wallet2로 초기화한다. 
+
+*/
+
+/*
+지갑 1 = 3000원, 지갑 2 = 3500원
+참조를 이용하여 내용들을 교환:
+지갑 1 = 3500원, 지갑 2 = 3000원
+포인터를 이용하여 내용들을 다시 교환:
+지갑 1 = 3000원, 지갑 2 = 3500원
+값으로 전달하여 내용 교환 시도:
+지갑 1 = 3000원, 지갑 2 = 3500원
+*/
