@@ -38,6 +38,7 @@ rodent = rat;
 
 /*
 rats = 101, rodents = 101
-rats = 102, rodents = 102
-rats의 주소 = 0x5ffe54, rodents의 주소 = 0x5ffe54
+rats의 주소 = 0x5ffe50, rodents의 주소 = 0x5ffe50
+bunnies = 50, rats = 50, rodents = 50
+, rodents의 주소 = 0x5ffe50
 */
