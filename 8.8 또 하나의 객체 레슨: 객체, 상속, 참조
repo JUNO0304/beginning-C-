@@ -1,0 +1,99 @@
+#include <iostream>
+#include <fstream>
+#include<cstdlib>
+using namespace std;
+
+void file_it(ostream & os, double fo, const double fe[], int n);
+const int LIMIT =  5;
+
+
+int main()
+{
+    ofstream fout;
+    const char * fn = "ep-data.txt";
+    fout.open(fn);
+    if(!fout.is_open())
+    {
+        cout << fn << " 파일을 열 수 없습니다. 끝.\n";
+        exit(EXIT_FAILURE);
+    }
+    double objective;
+    cout << "대물렌즈 초점거리를 mm 단위로 입력하십시오: ";
+    cin >> objective;
+    double eps[LIMIT];
+    cout << LIMIT << "가지 대안렌즈의 초점거리를 mm 단위로 입력하십시오:\n";
+    for(int i = 0; i < LIMIT; i++)
+    {
+        cout << "대안렌즈 #" << i + 1 << ": ";
+        cin >> eps[i];
+    }
+    file_it(fout, objective, eps, LIMIT);
+    file_it(cout, objective, eps, LIMIT);
+    cout << "종료\n";
+    return 0; 
+}
+
+void file_it(ostream & os, double fo, const double fe[], int n)
+{
+    ios_base::fmtflags initial;
+    initial = os.setf(ios_base::fixed);
+    os.precision(0);
+    os << "대물렌즈의 초점거리: " << fo << " mm\n";
+    os.setf(ios::showpoint);
+    os.precision(1);
+    os.width(17);
+    os << "대안렌즈 초점거리";
+    os.width(15);
+    os << "확대배율" << endl;
+    for(int i = 0; i< n; i++)
+    {
+        os.width(17);
+        os << fe[i];
+        os.width(15);
+        os << int (fo/fe[i] + 0.5) << endl;
+    }
+    os.setf(initial);
+}
+
+
+/*
+또 하나의 객체 레슨: 객체, 상속, 참조
+한 클래스에서 다른 클래스로 기능을 전달하는 것을 가능하게 하는것을 상속(inheritance) 라고 부른다.
+ostream 과 ofstream
+기초 클래스와 파생 클래스
+
+참조 매개변수는 언제 사용하는가?
+-호출 함수에 있는 데이터 객체의 변경을 허용하기 위해
+-전체 데이터 객체 대신에 참조를 전달하여 프로그램의 속도를 높이기 위해
+
+함수가 전달된 데이터를 변경하지 않고 사용만 하는 경우
+-데이터 객체가 기본 데이터형이나 작은 구조체라면 값으로 전달한다
+-데이터 객체가 배열이라면 포인터가 유일한 선택이므로 포인터를 사용한다. 포인터를 const를 지시하는 포인터로 만든다.
+-데이터 객체가 덩치 큰 구조체라면 const 포인터나 const 참조를 사용하여 프로그램의 속도를 높인다. 이것은 구조체나 클래스 설계를 복사하는데 드는 시간과 공간을 절약한다
+-데이터 객체가 클래스 객체라면 const참조를 사용한다. 클래스 설계 자체가 흔히 참조를 요구한다. 
+
+함수가 호출 함수의 데이터를 변경하는 경우
+-데이터 객체가 기본 데이터형이면 포인터를 사용한다. 
+-데이터 객체가 배열이면 유일한 선택은 포인터
+-데이터 객체가 구조체이면 참조 또는 포인터를 사용
+-데이터 객체가 클래스 객체이면 참조를 사용한다. 
+
+*/
+
+/*
+대물렌즈 초점거리를 mm 단위로 입력하십시오: 1800
+5가지 대안렌즈의 초점거리를 mm 단위로 입력하십시오:
+대안렌즈 #1: 30
+대안렌즈 #2: 19
+대안렌즈 #3: 14
+대안렌즈 #4: 8.8
+대안렌즈 #5: 7.5
+대물렌즈의 초점거리: 1800 mm
+대안렌즈 초점거리   확대배율
+             30.0             60
+             19.0             95
+             14.0            129
+              8.8            205
+              7.5            240
+종료
+*/
