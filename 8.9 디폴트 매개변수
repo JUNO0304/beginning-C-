@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+const int ArSize = 80;
+char* left(const char * str, int n = 1);
+int main()
+{
+    char sample[ArSize];
+    cout << "문자열을 입력하십시오:\n";
+    cin.get(sample, ArSize);
+    char *ps = left(sample, 4);
+    cout << ps << endl; 
+    delete [] ps;
+    ps = left(sample);
+    cout << ps << endl;
+    delete [] ps; 
+
+    return 0; 
+}
+char * left (const char * str, int n)
+{
+    if (n < 0)
+        n = 0;
+    char * p = new char [n+1];
+    int i;
+    for(i = 0; i < n && str[i]; i++)
+        p[i] = str[i];
+    while(i <= n)
+        p[i++] = '\0';
+    return p;
+}
+/*
+디폴트 매개변수
+디폴트 매개변수란 함수 호출에서 실제 매개변수를 생략했을 경우에 실제 매개변수 대신 사용되는 값이다.
+예를 들어 void wow(int n); 에서 n 이 1로 내정되도록 디폴트 값을 지정했다 면 실제 매개변수를 생략한 wow()함수 호출은 wow(1) 과 같다. 
+문자열과 자연수 n 을 매개변수로 취하여, 왼쪽에서부터 n까지 읽어 리턴하는 left()라는 함수가 있다고 가정했을때, 이함수는 원래 문자열의 일부를 포함하고 있는 새로운 포인터를 리턴할것이다
+
+디폴트 값은 어떻게 설정하는가? 함수 원형을 손본다
+char * left(const char *str, int n = 1);
+함수가 새로운 문자열을 리턴하므로 그것의 데이터형은 char *, 즉 문자를 지시하는 포인터여야 한다. 
+원본 문자열은 변경하지 않으므로 const를 사용해준다.
+n 이 1이라는 디폴트 값을 가질수 있도록 n =1 이라는 문구를 포함시켜준다
+매개변수 리스트를 사용할 때에는 디폴트 매개변수를 오른쪽에서 왼쪽의 순서대로 첨가해야 한다. 
+어떤 매개변수를 디폴트 매개변수로 만들려면, 그 매개변수보다 오른쪽에 있는 모든 매개변수를 디폴트 매개변수로 만들어야한다.
+
+*/
+
+/*
+문자열을 입력하십시오:
+forthcoming 
+fort
+f
+*/
