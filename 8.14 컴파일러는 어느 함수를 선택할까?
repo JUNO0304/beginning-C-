@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+template <typename T>
+void ShowArray(T arr[], int n);
+
+template <typename T>
+void ShowArray(T * arr[], int n);
+
+struct debts
+{
+    char name[50];
+    double amount;
+};
+
+int main(void)
+{
+    int things[6] = {13, 31, 103, 301, 310, 130};
+    struct debts mr_E[3] =
+    {
+        {"Ima wolfe", 2400.0},
+        {"Ura Foxe", 1300.0},
+        {"Iby Stout", 1800.0}
+    };
+    double * pd[3];
+
+    for(int i = 0; i < 3; i++)
+        pd[i] = &mr_E[i].amount;
+    
+    cout << "Mr. E의 재산 목록:\n";
+    ShowArray(things, 6);
+    cout << "MR. E의 채무 목록:\n";
+    ShowArray(pd, 3);
+
+    return 0; 
+}
+
+template <typename T>
+void ShowArray(T arr[], int n)
+{
+    cout << "템플릿 A\n";
+    for(int i = 0; i < n; i++)
+        cout << arr[i] << ' ';
+    cout << endl; 
+}
+
+
+template <typename T>
+void ShowArray(T * arr[], int n)
+{
+    cout << "템플릿 B\n";
+    for(int i = 0; i < n; i++)
+        cout << *arr[i] << ' ';
+    cout << endl;
+}
+/*
+컴파일러는 어느 함수를 선택할까?
+컴파일러 입장에서는 함수 오버로딩, 함수 템플릿, 함수 템플릿 오버로딩 등 다양한 선택지가 있기에, 어느 함수를 사용할지에 대해서 프로그래머는 잘 알고있어야 한다
+컴파일러가 어느 함수를 선택하는지에 대한 알고리즘에 대해 알아보자
+1단계: 후보 함수들의 목록을 만든다. 이들은 호출된 함수와 이름이 동일한 함수와 함수 템플릿들이다
+2단계: 매개변수의 개수가 일치하는 함수들을 찾는다. 실제 매개변수의 데이터형과 대응하는 형식 매개변수의 데이터형과 정확하게 일치하는 경우도 포함된다 여기서는 데이터형 변환도 이루어진다
+3단계: 가장 적당한 함수가 있는지 판단한다
+
+*/
+
+/*
+Mr. E의 재산 목록:
+템플릿 A
+13 31 103 301 310 130
+MR. E의 채무 목록:
+템플릿 B
+2400 1300 1800
+*/
